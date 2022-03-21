@@ -1,7 +1,8 @@
 
+
 function criaMapa() {
 
-    document.querySelector('#mapContainer').innerHTML = "";    
+    document.querySelector('#mapContainer').innerHTML = "";
     var input = document.querySelector("#txtSearch").value;
     document.getElementById('mapContainer').style.display = 'block';
     // Initialize the platform object:
@@ -42,6 +43,7 @@ function criaMapa() {
                 zoom: 10,
                 center: { lng: fresno.Longitude, lat: fresno.Latitude }
             });
+
         const marker = new H.map.Marker({ lat: fresno.Latitude, lng: fresno.Longitude });
         map.addObject(marker);
     }
