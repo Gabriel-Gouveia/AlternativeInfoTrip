@@ -42,6 +42,8 @@ function criaMapa() {
                 zoom: 10,
                 center: { lng: fresno.Longitude, lat: fresno.Latitude }
             });
+        const marker = new H.map.Marker({ lat: fresno.Latitude, lng: fresno.Longitude });
+        map.addObject(marker);
     }
     start();
 }
