@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="www/js/jquery.mobile.structure-1.4.5.min.css">
+    <link rel="stylesheet" href="www/js/jquery.mobile.theme-1.4.5.min.css">
+    <link rel="stylesheet" href="www/js/jquery.mobile.inline-png-1.4.5.min.css">
+    <link rel="stylesheet" href="www/js/jquery.mobile.inline-svg-1.4.5.min.css">
+    <link rel="stylesheet" href="www/js/jquery.mobile.external-png-1.4.5.min.css">
+    <link rel="stylesheet" href="www/css/bootstrap-5.0.0-beta2-dist/css/bootstrap.min.css">
+    <script src="www/js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="www/script.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js" type="text/javascript" charset="utf-8"></script>
+    <title>Info Trip</title>
+</head>
+
+<body style="color: #0377fc">
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <a href="javascript:void(0)" onclick="voltaParaHome()">Home</a>
+        <a href="#">Hoteis</a>
+        <a href="#">Rotas</a>
+        <a href="javascript:void(0)" onclick="abreLocaisInteressantes()">Locais interessantes</a>
+        <!--<a href="#">Contact</a>-->
+    </div>
+
+    <div data-role="page" id="homePage">
+        <div class="container">
+            <div data-role="header">
+
+                <h1
+                    style="text-align: center; font-family: Brush Script MT, Helvetica, sans-serif; color: snow; margin-top: 30px; font-size: 80px;">
+                    <button class="openbtn" onclick="openNav()">☰ </button>
+                    <img src="www/img/airplance-iconn.svg" width="48px;" height="48px;">Info Trip
+                </h1>
+
+            </div>
+
+            <div data-role="main"
+                style="margin-left: 25%; margin-right: 25%; border: 4px; border-radius: 5px; border-color: snow; border-style: solid; padding: 1em; margin-top: 10%;">
+                <p style="color: snow; font-size: 20px;">
+                    Para onde ir hoje?
+                </p>
+                <input type="text" name="txtPesquisar" id="txtSearch" placeholder="Endereço aqui" class="form-control">
+                <br>
+                <button class="btn btn-outline-light" onclick="criaMapa()">Pesquisar</button>
+                <br>
+                <br>
+                <div style="width:100%; height: 480px; display: none;" id="mapContainer"></div>
+                <br>
+            </div>
+
+            <br>
+            <br>
+            <br>
+            <h2 id="tituloHotel" style="text-align: center; display: none;">Hoteis</h2>
+            <br>
+            <br>
+            <div class="card-group" id="cardGroup"
+                style="margin-left: 10%; margin-right: 10%; margin-bottom: 5%; display: none;">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" id="hotel1">Card title</h5>
+                        <p class="card-text" id="hotelAddress1"></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" id="hotel2">Card title</h5>
+                        <p class="card-text" id="hotelAddress2"></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" id="hotel3">Card title</h5>
+                        <p class="card-text" id="hotelAddress3">T</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+        <div data-role="footer" style="color: #0377fc" data-position="fixed">
+            <footer class="footer">
+                Gabriel Alves Gouveia
+            </footer>
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <div data-role="page" id="locaisInteressantes" style="display: none;">
+        <div data-role="header">
+            <h1 style="color: snow; text-align: center;">
+                <button class="openbtn" onclick="openNav()">☰ </button>
+                Locais interessantes
+            </h1>            
+        </div> 
+
+        <div data-role="main" style="margin-left: 25%; margin-right: 25%; border: 4px; border-radius: 5px; border-color: snow; border-style: solid; padding: 1em; margin-top: 10%;">
+            <p style="color: snow; font-size: 20px;">
+                Digite o lugar dos sonhos!
+            </p>
+            <input type="text" name="txtLocais" id="txtInteresting" placeholder="Digite qualquer lugar" class="form-control">
+            <br>
+            <button class="btn btn-outline-light" onclick="sugerir()">Pesquisar</button>
+            <br>
+            <br>
+            <div style="width:100%; height: 480px; display: none;" id="mapContainerSugestao"></div>
+            <br>
+            <br>
+            <br>
+            <h1 style="display: none;" id="tituloLM"> Pontos interessantes </h1>
+            <br>
+            <br>
+            <div class="card-group" id="cardGroupLandMarks"
+                style="margin-left: 10%; margin-right: 10%; margin-bottom: 5%; display: none;">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" id="lm1">Card title</h5>
+                        <p class="card-text" id="lmark1"></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" id="lm2">Card title</h5>
+                        <p class="card-text" id="lmark2"></p>
+                    </div>
+                </div>                
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div data-role="footer" style="color: #0377fc" data-position="fixed">
+            <footer class="footer">
+                Gabriel Alves Gouveia
+            </footer>
+        </div>
+
+    </div>
+
+    <script src="cordova.js"></script>
+    <script src="js/index.js"></script>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
+
+        function abreLocaisInteressantes() {
+            document.getElementById("homePage").style.display = 'none';
+            document.getElementById("locaisInteressantes").style.display = 'block';
+        }
+
+        function fechaLocaisInteressantes() {
+            document.getElementById("homePage").style.display = 'block';
+            document.getElementById("locaisInteressantes").style.display = 'none';
+        }
+
+        function voltaParaHome(){
+            if (document.getElementById("locaisInteressantes").style.display == 'block'){
+                document.getElementById("locaisInteressantes").style.display = 'none';
+            }
+            document.getElementById("homePage").style.display = 'block';
+        }
+
+    </script>
+
+</body>
+
+</html>
